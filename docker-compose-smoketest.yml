@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+  mvc01:
+    ports:
+      - 80
+
+networks:
+  app-net:

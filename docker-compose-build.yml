@@ -1,0 +1,16 @@
+version: "3.7"
+
+x-args: &args
+  args:
+    BUILD_NUMBER: ${BUILD_NUMBER:-0}
+    BUILD_TAG: ${BUILD_TAG:-local}
+
+services:
+  mvc01:
+    build:
+      context: mvc01
+      dockerfile: Dockerfile
+      <<: *args
+
+networks:
+  app-net:

@@ -10,6 +10,14 @@ RUN dotnet publish -o out
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0@sha256:6c4df091e4e531bb93bdbfe7e7f0998e7ced344f54426b7e874116a3dc3233ff
+
+ARG BUILD_NUMBER=0
+ARG BUILD_TAG=local
+
+LABEL version="3.0"
+LABEL build_number=${BUILD_NUMBER}
+LABEL build_tag=${BUILD_TAG}
+
 WORKDIR /App
 COPY --from=build /App/out .
 ENTRYPOINT ["dotnet", "mvc01.dll"]

@@ -1,36 +1,36 @@
 pipeline {
     agent any
     environment {
-       REGISTRY = "registry.local:5000"
+       REGISTRY = "192.168.11.114:5000"
     }
     stages {
         stage('Verify') {
             steps {
-                dir('ch11/exercises') {
+                dir('./') {
                     bat './ci/00-verify.bat'
                 }
             }
         }
         stage('Build') {
             steps {
-                dir('ch11/exercises') {
+                dir('./') {
                     bat './ci/01-build.bat'
                 }
             }
         }
         stage('Test') {
             steps {
-                dir('ch11/exercises') {
+                dir('./') {
                     bat './ci/02-test.bat'
                 }
             }
         }
         stage('Push') {
             steps {
-                dir('ch11/exercises') {
+                dir('./') {
                     bat './ci/03-push.bat'
-                    echo "Pushed web to http://$REGISTRY/v2/diamol/ch11-numbers-web/tags/list"
-                    echo "Pushed api to http://$REGISTRY/v2/diamol/ch11-numbers-api/tags/list"
+                    echo "Pushed web to http://$REGISTRY/v2/it/mvc01/tags/list"
+                    echo "Pushed api to http://$REGISTRY/v2/it/mvc01/tags/list"
                 }
             }
         }

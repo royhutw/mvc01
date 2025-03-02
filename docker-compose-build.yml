@@ -9,7 +9,7 @@ services:
   mvc01:
     build:
       context: mvc01
-      dockerfile: Dockerfile
+      dockerfile: mvc01/Dockerfile
       <<: *args
 
 networks:

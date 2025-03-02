@@ -2,6 +2,6 @@ version: "3.7"
 
 services:
   mvc01:
-    image: ${REGISTRY:-docker.io}/diamol/ch11-numbers-api:v3-build-${BUILD_NUMBER:-local}
+    image: ${REGISTRY:-docker.io}/v2/it/mvc01:v3-build-${BUILD_NUMBER:-local}
     networks:
       - app-net

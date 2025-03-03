@@ -6,7 +6,7 @@ COPY . ./
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release
-RUN dotnet tool install --global dotnet-sonarscanner
+RUN dotnet tool install dotnet-sonarscanner --tool-path $HOME/.dotnet/tools
 RUN export PATH="$PATH:$HOME/.dotnet/tools"
 RUN dotnet sonarscanner begin /k:"mvc01" /d:sonar.host.url="http://192.168.11.114:9001"  /d:sonar.token="sqa_9b59fdfc44b3ebfdadbe945e3b0bbe7ae2943a59"
 RUN dotnet publish -o out

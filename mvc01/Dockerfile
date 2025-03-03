@@ -9,6 +9,7 @@ RUN dotnet restore
 RUN dotnet tool install dotnet-sonarscanner --tool-path $HOME/.dotnet/tools
 RUN export PATH="$PATH:$HOME/.dotnet/tools"
 RUN chmod +x $HOME/.dotnet/tools/dotnet-sonarscanner
+RUN ls -ltra $HOME/.dotnet/tools/
 RUN dotnet sonarscanner begin /k:"mvc01" /d:sonar.host.url="http://192.168.11.114:9001"  /d:sonar.token="sqa_9b59fdfc44b3ebfdadbe945e3b0bbe7ae2943a59"
 RUN dotnet publish -o out
 RUN dotnet sonarscanner end /d:sonar.token="sqa_9b59fdfc44b3ebfdadbe945e3b0bbe7ae2943a59"

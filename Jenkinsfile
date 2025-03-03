@@ -14,11 +14,9 @@ pipeline {
         }
         stage('Build') {
             steps {
-                withSonarQubeEnv('sonarqube') {
-                    dir('./') {
-                        sh 'chmod +x ./ci/01-build.bat'
-                        sh './ci/01-build.bat'
-                    }
+                dir('./') {
+                    sh 'chmod +x ./ci/01-build.bat'
+                    sh './ci/01-build.bat'
                 }
             }
         }

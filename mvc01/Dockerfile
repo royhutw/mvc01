@@ -6,7 +6,7 @@ COPY . ./
 # Restore as distinct layers
 RUN dotnet restore
 # Build and publish a release
-RUN dotnet tool install --global dotnet-sonarscanner
+RUN dotnet tool install --local dotnet-sonarscanner
 RUN export PATH="$PATH:/root/.dotnet/tools"
 RUN pwd
 RUN ls -ltra

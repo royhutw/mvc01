@@ -7,7 +7,7 @@ COPY . ./
 # RUN dotnet restore
 # Build and publish a release
 RUN dotnet tool install dotnet-sonarscanner --tool-path /App/.dotnet/tools
-RUN export PATH="$PATH:/App/.dotnet/tools"
+ENV PATH="$PATH:$HOME/.dotnet/tools"
 RUN chmod +x /App/.dotnet/tools/dotnet-sonarscanner
 RUN env
 RUN ls -ltra /App/.dotnet/tools/

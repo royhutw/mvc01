@@ -4,7 +4,7 @@ WORKDIR /App
 # Copy everything
 COPY . ./
 # Restore as distinct layers
-# RUN dotnet restore
+RUN dotnet restore
 # Build and publish a release
 RUN dotnet tool install dotnet-sonarscanner --tool-path /App/.dotnet/tools
 ENV PATH="$PATH:/App/.dotnet/tools"

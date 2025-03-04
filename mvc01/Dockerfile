@@ -8,14 +8,14 @@ COPY . ./
 # Build and publish a release
 RUN dotnet tool install dotnet-sonarscanner --tool-path /App/.dotnet/tools
 ENV PATH="$PATH:/App/.dotnet/tools"
-RUN chmod +x /App/.dotnet/tools/dotnet-sonarscanner
-RUN env
-RUN ls -ltra /App/.dotnet/tools/
-RUN cd /App
-RUN pwd
-RUN hostname
+# RUN chmod +x /App/.dotnet/tools/dotnet-sonarscanner
+# RUN env
+# RUN ls -ltra /App/.dotnet/tools/
+# RUN cd /App
+# RUN pwd
+# RUN hostname
 RUN dotnet sonarscanner begin /k:"mvc01" /d:sonar.host.url="http://192.168.11.114:9001"  /d:sonar.token="sqa_9b59fdfc44b3ebfdadbe945e3b0bbe7ae2943a59"
-# RUN dotnet publish -o out
+RUN dotnet publish -o out
 RUN dotnet sonarscanner end /d:sonar.token="sqa_9b59fdfc44b3ebfdadbe945e3b0bbe7ae2943a59"
 
 # Build runtime image

@@ -34,9 +34,9 @@ pipeline {
             steps {
                 dir('./') {
                     sh '''
+                    ./ci/02-test.bat
                     docker run -dt --network mvc01-smoketest_app-net --name zap zaproxy/zap-stable /bin/bash
                     docker container exec zap mkdir /zap/wrk
-                    ./ci/02-test.bat
                     docker container exec zap zap-baseline.py -t http://localhost -r report.html
                     ./ci/99-down.bat
                     docker cp zap:/zap/work/report.html ${WORKSPACE}/report.html

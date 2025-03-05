@@ -25,18 +25,25 @@ pipeline {
                 dir('./') {
                     sh 'chmod +x ./ci/02-test.bat'
                     sh './ci/02-test.bat'
+                    sh 'chmod +x ./ci/99-down.bat'
+                    sh './ci/99-down.bat'
                 }
             }
         }
         stage('ZAP'){
             steps {
                 dir('./') {
-                    docker compose up -d
+                    sh '''
+                    docker run -dt --name zap zaproxy/zap-stable /bin/bash
+                    docker exec zap mkdir /zap/wrk
+                    ./ci/02-test.bat
                     docker container run -t --name zap zaproxy/zap-stable zap-baseline.py -t http://192.168.11.114 -r report.html
+                    ./ci/99-down.bat
                     docker cp zap:/zap/work/report.html ${WORKSPACE}/report.html
                     docker container stop zap
                     docker container rm zap
-                    docker compose down
+                    '''
+                }
             }
         }
         stage('Email ZAP Report'){

@@ -28,6 +28,28 @@ pipeline {
                 }
             }
         }
+        stage('ZAP'){
+            steps {
+                dir('./') {
+                    docker compose up -d
+                    docker container run -v $(pwd):/zap/wrk/:rw -t --rm --name zap zaproxy/zap-stable zap-baseline.py -t http://192.168.11.114 -g gen.conf -r testreport.html
+                    docker compose down
+            }
+        }
+        stage('Email ZAP Report'){
+            steps{
+                dir('./') {
+                    emailext (
+                        attachLog: true,
+                        attachmentsPattern: '**/*.html',
+                        body: "Please find the attached report for the latest OWASP ZAP Scan.",
+                        recipientProviders: [buildUser()],
+                        subject: "OWASP ZAP Report",
+                        to: 'royhu@dst-conn.com.tw'
+                    )
+                }
+            }
+        }
         stage('Push') {
             steps {
                 dir('./') {

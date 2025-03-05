@@ -34,10 +34,10 @@ pipeline {
             steps {
                 dir('./') {
                     sh '''
-                    docker run -dt --name zap zaproxy/zap-stable /bin/bash
-                    docker exec zap mkdir /zap/wrk
+                    docker run -dt --network container:mvc01-smoketest-mvc01-1 --name zap zaproxy/zap-stable /bin/bash
+                    docker container exec zap mkdir /zap/wrk
                     ./ci/02-test.bat
-                    docker container run -t --name zap --network container:mvc01 zaproxy/zap-stable zap-baseline.py -t http://192.168.11.114 -r report.html
+                    docker container exec zap zap-baseline.py -t http://localhost -r report.html
                     ./ci/99-down.bat
                     docker cp zap:/zap/work/report.html ${WORKSPACE}/report.html
                     docker container stop zap

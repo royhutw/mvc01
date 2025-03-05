@@ -32,7 +32,10 @@ pipeline {
             steps {
                 dir('./') {
                     docker compose up -d
-                    docker container run -v ./:/zap/wrk/:rw -t --rm --name zap zaproxy/zap-stable zap-baseline.py -t http://192.168.11.114 -g gen.conf -r testreport.html
+                    docker container run -t --name zap zaproxy/zap-stable zap-baseline.py -t http://192.168.11.114 -r report.html
+                    docker cp zap:/zap/work/report.html ${WORKSPACE}/report.html
+                    docker container stop zap
+                    docker container rm zap
                     docker compose down
             }
         }

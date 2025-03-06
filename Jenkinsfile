@@ -37,7 +37,7 @@ pipeline {
                     ./ci/02-test.bat
                     docker run -dt --network mvc01-smoketest_app-net --name zap zaproxy/zap-stable /bin/bash
                     docker container exec zap mkdir /zap/wrk
-                    docker container exec zap zap-baseline.py -t http://mvc01-smoketest-mvc01-1:5120 -r report.html
+                    docker container exec zap zap-baseline.py -t http://mvc01-smoketest-mvc01-1:8080 -r report.html
                     ./ci/99-down.bat
                     docker cp zap:/zap/work/report.html ${WORKSPACE}/report.html
                     docker container stop zap

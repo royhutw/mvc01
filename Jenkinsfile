@@ -48,16 +48,14 @@ pipeline {
         }
         stage('Email ZAP Report'){
             steps{
-                dir('./') {
-                    emailext (
-                        attachLog: true,
-                        attachmentsPattern: '**/*.html',
-                        body: "Please find the attached report for the latest OWASP ZAP Scan.",
-                        recipientProviders: [buildUser()],
-                        subject: "OWASP ZAP Report",
-                        to: 'royhu@dst-conn.com.tw'
-                    )
-                }
+                emailext (
+                    attachLog: true,
+                    attachmentsPattern: '**/*.html',
+                    body: "Please find the attached report for the latest OWASP ZAP Scan.",
+                    recipientProviders: [buildUser()],
+                    subject: "OWASP ZAP Report",
+                    to: 'royhu@dst-conn.com.tw'
+                )
             }
         }
         stage('Push') {

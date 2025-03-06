@@ -3,7 +3,7 @@ version: "3.7"
 services:
   mvc01:
     ports:
-      - "28080:8080"
+      - "8080"
 
 networks:
   app-net:

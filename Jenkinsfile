@@ -39,7 +39,7 @@ pipeline {
                     docker container exec zap mkdir /zap/wrk
                     docker container exec zap zap-baseline.py -t http://mvc01-smoketest-mvc01-1:8080 -r report.html
                     ./ci/99-down.bat
-                    docker cp zap:/zap/wrk/report.html ${WORKSPACE}/report.html
+                    docker cp zap:/zap/wrk/report.html ${WORKSPACE}/report.html -I
                     docker container stop zap
                     docker container rm zap
                     '''

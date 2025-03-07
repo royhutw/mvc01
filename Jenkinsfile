@@ -56,6 +56,9 @@ pipeline {
                     subject: "OWASP ZAP Report",
                     to: 'royhu@dst-conn.com.tw'
                 )
+                dir('./') {
+                    sh rm -rf report.html
+                }
             }
         }
         stage('Push') {

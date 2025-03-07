@@ -57,7 +57,7 @@ pipeline {
                     to: 'royhu@dst-conn.com.tw'
                 )
                 dir('./') {
-                    sh rm -rf report.html
+                    sh 'rm -rf report.html'
                 }
             }
         }

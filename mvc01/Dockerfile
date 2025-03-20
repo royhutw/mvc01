@@ -16,7 +16,7 @@ ENV PATH="$PATH:/App/.dotnet/tools"
 # RUN hostname
 RUN dotnet sonarscanner begin /k:"mvc01" /d:sonar.host.url="http://192.168.11.147:9001"  /d:sonar.token="sqa_9b59fdfc44b3ebfdadbe945e3b0bbe7ae2943a59"
 RUN dotnet publish -o out
-RUN dotnet sonarscanner end /d:sonar.token="sqa_9b59fdfc44b3ebfdadbe945e3b0bbe7ae2943a59"
+RUN dotnet sonarscanner end /d:sonar.token="squ_3e67aff0aecce7dedd6abd0cd76fc1c2620c4f4a"
 
 # Build runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0@sha256:6c4df091e4e531bb93bdbfe7e7f0998e7ced344f54426b7e874116a3dc3233ff

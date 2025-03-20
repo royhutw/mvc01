@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-       REGISTRY = "192.168.11.147:5001"
+       REGISTRY = "labr01:5001"
     }
     stages {
         stage('Verify') {
